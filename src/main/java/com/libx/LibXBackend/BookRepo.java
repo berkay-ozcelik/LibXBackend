@@ -20,7 +20,8 @@ public class BookRepo {
 
         int i = 0;
         for (String bookName : allBookNames) {
-            if (bookName.startsWith(prefix)) {
+            bookName = bookName.toLowerCase();
+            if (bookName.startsWith(prefix.toLowerCase())) {
                 Object[] pair = new Object[]{allBookNumbers.get(i), bookName};
                 found.add(pair);
             }
