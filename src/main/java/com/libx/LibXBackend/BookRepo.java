@@ -22,7 +22,7 @@ public class BookRepo {
         for (String bookName : allBookNames) {
             bookName = bookName.toLowerCase();
             if (bookName.startsWith(prefix.toLowerCase())) {
-                Object[] pair = new Object[]{allBookNumbers.get(i), bookName};
+                Object[] pair = new Object[]{allBookNumbers.get(i), allBookNames.get(i)};
                 found.add(pair);
             }
             i++;
