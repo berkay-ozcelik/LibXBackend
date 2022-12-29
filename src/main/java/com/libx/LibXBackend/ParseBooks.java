@@ -1,32 +1,35 @@
 package com.libx.LibXBackend;
 
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Scanner;
 
 public class ParseBooks {
+    private static String offlineCatalog;
+
+    static {
+    }
+
 
     public static void main(String[] args) {
-        //parseBooks();
+        parseBooks("pg_catalog.csv");
     }
-    public static void parseBooks(String bookList) {
-        // Use a regular expression to extract the book id, name, and author
-        // from each line in the input string
-        Pattern p = Pattern.compile("^(\\d+)\\s*(.*?),\\s*by\\s*(.*?)\\s*$");
 
-        // Split the input string into individual lines
-        String[] lines = bookList.split("\n");
+    public static void parseBooks(String path) {
+        File file = new File(path);
+        Scanner input = null;
+        try {
+            input = new Scanner(file);
+        } catch (FileNotFoundException ignored) {}
 
-        // Iterate through each line and parse the book id, name, and author
-        for (String line : lines) {
-            Matcher m = p.matcher(line);
-            if (m.find()) {
-                String bookId = m.group(1);
-                String bookName = m.group(2);
-                String bookAuthor = m.group(3);
-                System.out.println("Book id: " + bookId + ", name: " + bookName + ", author: " + bookAuthor);
-            }
+        input.useDelimiter(",");
+        while (input.hasNext()) {
+            System.out.print(input.next() + " ");
         }
+
+
     }
 }

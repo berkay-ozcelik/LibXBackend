@@ -1,5 +1,7 @@
 package com.libx.LibXBackend.controllers;
 
+
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,11 +19,13 @@ import java.util.HashMap;
 @RequestMapping("/book_api_v2")
 public class BookController {
     @GetMapping("/search/{bookName}")
-    public ResponseEntity<HashMap<Integer, String>> getBookNames(@PathVariable String bookName) {
-        HashMap<Integer, String> foundBooks = new HashMap<>();
+    public ResponseEntity<ArrayList<Object[]>> getBookNames(@PathVariable String bookName) {
+        ArrayList<Object[]> foundBooks = new ArrayList<>();
 
         for (int bookID = 0; bookID < 5; bookID++) {
-            foundBooks.put(bookID, " Coming from rest api " + bookName + " ____ test");
+            Object[] pair = {bookID, "Test book" + 1};
+
+            foundBooks.add(pair);
         }
         return new ResponseEntity<>(foundBooks, HttpStatus.OK);
     }
